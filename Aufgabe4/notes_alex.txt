@@ -1,0 +1,22 @@
+Gesamturteil: Strong Accept or Accept?
+
+
+Kurze Zusammenfassung des Inhalts (höchstens 5 Sätze)
+~ Beschreibt ein bereits existierendes System und dessen Einsatz und Verhalten (?) in der Praxis
+~ Das Paper stellt ein von Google entwickeltes Datenspeichersystem vor, welches zur Speicherung und Abfrage von Messdaten/Statistiken zu Google Ads eingesetzt wird.
+~ Mesa ist ein RDBMS-ähnliches System
+
+Kurzbegründung des Urteils: Liste der Stärken und Schwächen (Stichpunkte)
++ Passt sehr gut in den Themenbereich "Verteilte Systeme" (geo-replicated)
++ Hohe Gesamtqualität von Inhalt, Thema, Neuigkeiten, Aufbau, Layout
+
+Detaillierte Kommentare zum Papier (zusammen 400 Wörter)
+- Einleitung bietet einen guten Überblick zu Inhalt und Aufbau des Papers
+- Zahlreiche, thematisch übereinstimmende Quellen.
++ Unterstützende Grafiken vorhanden => sind sie gut oder schlecht?
+- An einigen Stellen könnte es weitere Visualisierungen geben um das Textverständnis zu erleichtern und den Inhalt zu verdeutlichen.
++ Gesamt-Layout ist auf den ersten Blick sehr sauber und durchgängig, keine groben "Probleme/Fehler"
+- Kaputter Link "http:wwwmysql.com" in den References.
++ Das Paper ist sinnvoll strukturiert, der Leser schreitet Schritt für Schritt voran und behält dabei den roten Faden.
+
+??? Future Work fehlt?!

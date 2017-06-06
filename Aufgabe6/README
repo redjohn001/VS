@@ -1,0 +1,32 @@
+Aufruf des Testskripts (distribute.sh)
+-----------------------------------------
+
+$ ./distribute.sh <simple/fancy> [<path_to_class_files>] [<path_to_config_files (i.e., stack.xml, my_hosts, logging.cfg)>]
+
+Der erste Parameter spezifiziert die Art des Testfalls ('simple' oder 'fancy'). Parameter 2 und 3 sind optional. Werden diese weggelassen, muss dafür gesorgt werden, dass sowohl das distribute.sh-Skript als auch die Konfigurationsdateien (stack.xml, logging.cfg, my_hosts) im 'bin'-Verzeichnis (Verzeichnis, in dem sich die Class-Dateien befinden) liegen.
+
+Vor dem Aufruf ist darauf zu achten, dass mindestens drei beliebige CIP-Pool-Rechner in die Datei 'my_hosts' eingetragen wurden.
+
+Ablauf des Tests
+------------------
+
+* 'distribute.sh' liest 'my_hosts' ein und startet via SSH auf allen dort angegebenen Rechnern die Testanwendung 'vsue.distlock.VSLockTestCases'.
+  
+* Die Clients erstellen ein 'JChannel'-Objekt und verbinden sich darüber mit der Gruppe.
+
+* Jeder Client wartet so lange, bis seine aktuelle Sicht auf die Gruppe alle Clients enthält, mithin alle Clients den Verbindungsaufbau abgeschlossen haben.
+
+* Nun wird -- abhängig von der Wahl des Testfalls ('simple' oder 'fancy') -- ein etwa einminütiger Testfall gestartet, der in einer Schleife lock()- und unlock()-Aufrufe durchführt. Im einfachen Fall ('simple') erfolgt das bloße Senden dieser Anfragen; im erweiterten Fall ('fancy') erhält jedes Gruppenmitglied einen zufällig gewählten Kontobetrag (maximaler Betrag pro Mitglied: 1000). Im kritischen Abschnitt werden die Kontobeträge aller Mitglieder aufsummiert. Ferner können in diesem Abschnitt Überweisungen vom Konto eines Mitglieds auf das Konto eines anderen Mitglieds erfolgen. Somit ändern sich zwar die einzelnen Guthaben auf den Konten der Mitglieder, die initial gesetzte Gesamtsumme über alle Mitglieder bleibt aber stets gleich -- sofern der Synchronisationsmechanismus funktioniert.
+
+* Im Verzeichnis der Konfigurationsdateien wird jeweils eine Log-Datei pro Gruppenmitglied abgelegt (Dateinamen: 'vslocktest.simple.*.log' bzw. 'vslocktest.fancy.*.log').
+
+* Nach etwa einer Minute sollten sich (kein Deadlock vorausgesetzt) die Tests erkennbar beendet haben. Um herauszufinden, ob die Tests tatsächlich erfolgreich waren, kann das Skript 'checklogs.sh' verwendet werden.
+
+Aufruf des Überprüfungsskripts (checklogs.sh)
+-----------------------------------------------
+
+$ ./checklogs.sh [<path_to_log_files>]
+
+Optionaler Parameter: Pfad zum Verzeichnis der Log-Dateien.
+
+Dieses Skript prüft bei beiden Varianten, ob das eingestellte Zeitintervall (1 Min.) ohne Deadlock überstanden wurde. Bei der erweiterten Variante wird zudem überprüft, ob sich die Ausgaben der Summen ("Sum is ..."-Zeilen) unterscheiden. Ist dies nicht der Fall, gilt dieser Test als bestanden.

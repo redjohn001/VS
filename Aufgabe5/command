@@ -1,0 +1,1 @@
+java -cp bin:jgroups-3.6.8.Final.jar vsue.replica.VSKeyValueReplica 0 replica.addresses

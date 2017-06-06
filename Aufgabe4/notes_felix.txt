@@ -1,0 +1,79 @@
+--- Gesamturteil ---
+
+--- Kurze Zusammenfassung des Inhalts ---
+The paper describes Google's new data-warehouse system called Mesa, which was built to handle the ever increasing amount of data, while providing
+consistency and ability to query data in near-realtime. It scales across multiple data centers and can process big amounts of data while being able
+to respond to queries incedibly fast. Mesa is also continously generated and maintains ACID properties. The main reason for the development of Mesa 
+was to handle Google's ad buisness, but it can also function as a generic data warehouse system for other use cases.
+
+
+
+
+
+
+--- Stärken ---
+- Atmoic updates
+- Consistency and correctness
+- availability
+- near teal-time update throughput
+- query performance
+- scalability
+- online data and metadata transformation
+- continuously generated - andere systeme werden z.b. nur einmal am tag geupdated
+
+--- Schwächen ---
+-
+
+--- Detailierte Kommentare zum Papier ---
+
+
+- Mesa includes BigTable (metadata) and Colossus (files)
+
+
+
+
+
+Zusammenfassung:
+- Gesamturteil
+- Kurze Zusammenfassung des Inhalts (5 Sätze)
+- Kurzbegründung des Urteils (Stärken und Schwächen in Stichpunkten)
+- Detailierte Kommentare zum Papier
+
+
+Requirements
+- Atmoic updates
+- Consistency and correctness
+- availability
+- near teal-time update throughput
+- query performance
+- scalability
+- online data and metadata transformation
+
+Mesa
+- Google has published a paper describing their new data-warehouse system used internally by Google called Mesa. 
+  Mesa scales across multiple data centers and processes petabytes of data, while being able to respond to queries in sub-second time and maintain ACID properties.
+  Mesa was designed mainly around Google’s advertising use-case. 
+  Google built Mesa to be able to handle the ever increasing amount of data, while providing consistency and ability to query data in near-realtime.
+  [https://www.infoq.com/news/2014/08/google-data-warehouse-mesa]
+- Mesa is a distributed, replicated, and highly available data processing, 
+storage, and query system for structured data.
+- Generic data warehouseing solution that statisfies all requirements
+
+Storage system:
+- continuously generated - andere systeme werden z.b. nur einmal am tag geupdated
+- data is maintained using tables => table schema specifies structure
+- key and value columns
+- updates and queries:
+  - updates in batches; batches are create by an upstream system in
+    a frequency of a few minutes
+    => smaller and more frequent batches 
+       - would imply lower update latency
+       - higher resource consumption
+ - update automacity => multi-versioned approach
+
+
+
+
+
+
+
